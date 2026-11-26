@@ -1,71 +1,25 @@
+===== SENTIMENT ANALYSIS =====
 
-# Mini AI Application: Sentiment Analysis
+Enter a review: This movie is amazing and wonderful
 
-import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import Pipeline
+Review: This movie is amazing and wonderful
+Sentiment: POSITIVE
 
-# Step 1: Create Dataset
-data = {
-    "Review": [
-        "This product is amazing",
-        "I love this product",
-        "Excellent quality and service",
-        "Very happy with the purchase",
-        "The product is fantastic",
-        "Worst product ever",
-        "I hate this product",
-        "Very poor quality",
-        "Completely disappointed",
-        "Waste of money"
-    ],
+Enter a review: This movie is boring and terrible
 
-    "Sentiment": [
-        "Positive", "Positive", "Positive",
-        "Positive", "Positive",
-        "Negative", "Negative", "Negative",
-        "Negative", "Negative"
-    ]
-}
+Review: This movie is boring and terrible
+Sentiment: NEGATIVE
 
-df = pd.DataFrame(data)
+Enter a review: I really enjoyed this film
 
-# Step 2: Separate Features and Labels
-X = df["Review"]
-y = df["Sentiment"]
+Review: I really enjoyed this film
+Sentiment: POSITIVE
 
-# Step 3: Create AI Model
-model = Pipeline([
-    ("tfidf", TfidfVectorizer()),
-    ("classifier", LogisticRegression())
-])
+Enter a review: The acting was terrible
 
-# Step 4: Train Model
-model.fit(X, y)
+Review: The acting was terrible
+Sentiment: NEGATIVE
 
-print("AI Model Training Completed!")
+Enter a review: exit
 
-# Step 5: Test with User Input
-print("\nSENTIMENT ANALYSIS APPLICATION")
-
-while True:
-    review = input("\nEnter a review (or type exit): ")
-
-    if review.lower() == "exit":
-        print("Thank you for using the application!")
-        break
-
-    if not review.strip():
-        print("Please enter a valid review.")
-        continue
-
-    prediction = model.predict([review])
-    probabilities = model.predict_proba([review])[0]
-
-    print("\nPredicted Sentiment:", prediction[0])
-
-    for label, probability in zip(
-        model.classes_, probabilities
-    ):
-        print(f"{label}: {probability * 100:.2f}%")
+Program terminated.
